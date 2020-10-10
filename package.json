@@ -8,11 +8,22 @@
   "bin": {
     "gendiff": "/bin/gendiff.js"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx -n --experimental-vm-modules jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichegosebe/frontend-project-lvl2.git"
   },
   "author": "ilya tikhonov",
   "license": "ISC",
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {}
+  },
   "dependencies": {
     "commander": "^6.1.0",
     "fs": "0.0.1-security"
@@ -20,6 +31,7 @@
   "devDependencies": {
     "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0"
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.5.2"
   }
 }
