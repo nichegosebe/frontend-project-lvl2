@@ -2,7 +2,7 @@
   "name": "frontend-project-lvl2",
   "version": "1.0.2",
   "description": "hexlet education project - gendiff",
-  "main": "index.js",
+  "main": "gendiff.js",
   "type": "module",
   "private": "true",
   "bin": {
@@ -14,7 +14,8 @@
   "author": "ilya tikhonov",
   "license": "ISC",
   "dependencies": {
-    "commander": "^6.1.0"
+    "commander": "^6.1.0",
+    "fs": "0.0.1-security"
   },
   "devDependencies": {
     "eslint": "^7.9.0",
