@@ -12,3 +12,5 @@ program
   })
   .option('-f, --format', 'output format')
   .parse(process.argv);
+
+export default genDiff;
