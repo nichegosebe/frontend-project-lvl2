@@ -2,11 +2,11 @@
   "name": "frontend-project-lvl2",
   "version": "1.0.2",
   "description": "hexlet education project - gendiff",
-  "main": "gendiff.js",
+  "main": "index.js",
   "type": "module",
   "private": "true",
   "bin": {
-    "gendiff": "/bin/gendiff.js"
+    "gendiff": "./index.js"
   },
   "engines": {
     "node": ">=14"
