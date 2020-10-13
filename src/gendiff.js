@@ -23,7 +23,7 @@ const readDataFromFile = (filePath) => {
 };
 
 const genDiff = (object1, object2) => {
-  const diffString = Object.keys({...object1, ...object2})
+  const diffString = Object.keys({ ...object1, ...object2 })
     .sort()
     .reduce((acc, key) => {
       if (object2[key] === undefined) {
