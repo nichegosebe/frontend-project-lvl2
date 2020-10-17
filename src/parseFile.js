@@ -16,7 +16,7 @@ const yamlParser = (data) => {
 };
 
 const iniParser = (data) => {
-  const res = ini.safe(data);
+  const res = ini.parse(data);
   return res;
 };
 
