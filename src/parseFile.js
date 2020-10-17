@@ -1,25 +1,20 @@
 import { existsSync, readFileSync } from 'fs';
-
-const isFfileExists = (filePath) => {
-  try {
-    if (existsSync(filePath)) {
-      return true;
-    }
-  } catch (err) {
-    console.error(`Error while checking if ${filePath} exists:`, err);
-  }
-  return false;
-};
+import { resolve } from 'path';
 
 const readDataFromFile = (filePath) => {
-  if (isFfileExists(filePath)) {
-    try {
-      return readFileSync(filePath, 'UTF-8');
-    } catch (err) {
-      console.error(`Error reading JSON data from file ${filePath}`, err);
+  const fullFilePath = resolve(process.cwd(), filePath);
+  try {
+    if (existsSync(fullFilePath)) {
+      try {
+        return readFileSync(fullFilePath, 'UTF-8');
+      } catch (err) {
+        console.error(`Error reading JSON data from file ${filePath}`, err);
+      }
+    } else {
+      console.error(`Error: file ${filePath} is not found!`);
     }
-  } else {
-    console.error(`Error: file ${filePath} is not found!`);
+  } catch (err) {
+    console.error(`Error checking if file ${filePath} exists!`);
   }
   return false;
 };
