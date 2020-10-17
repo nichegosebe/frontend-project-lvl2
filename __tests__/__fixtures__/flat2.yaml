@@ -1,5 +1,5 @@
 - biggestValue: 21231013740662
   integetValue: 423207
-  FLOAT: +181265.43322
-  sameBool: true
-  null: 'notnull'
+  secondFileOnly_Country: Austria
+  differentValueFloat: +181265.43322
+  sameOnBothBool: true

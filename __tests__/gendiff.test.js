@@ -35,6 +35,8 @@ describe('Test with flat and empty files:', () => {
   test('- two non-empty flat JSON files', () => {
     const diff = genDiff(getFixturePath('flat1.json'), getFixturePath('flat2.json'));
     expect(diff).not.toEqual('{}');
+    expect(diff).not.toBeNull();
+    expect(diff).not.toBeUndefined();
     expect(diff).toMatchSnapshot();
   });
 
@@ -45,12 +47,16 @@ describe('Test with flat and empty files:', () => {
   test('- two non-empty flat YAML files', () => {
     const diff = genDiff(getFixturePath('flat1.yaml'), getFixturePath('flat2.yaml'));
     expect(diff).not.toEqual('{}');
+    expect(diff).not.toBeNull();
+    expect(diff).not.toBeUndefined();
     expect(diff).toMatchSnapshot();
   });
 
   test('- two non-empty flat YAML files with different extensions', () => {
     const diff = genDiff(getFixturePath('flat1.yaml'), getFixturePath('flat2.yml'));
     expect(diff).not.toEqual('{}');
+    expect(diff).not.toBeNull();
+    expect(diff).not.toBeUndefined();
     expect(diff).toMatchSnapshot();
   });
 });

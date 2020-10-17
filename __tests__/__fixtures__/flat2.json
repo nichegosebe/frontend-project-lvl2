@@ -1,6 +1,6 @@
 {
-	"date": "1998-12-18",
-	"random float": 65.635,
-	"bool": true,
-	"country": "Ukraine"
+	"differentDate": "1998-12-18",
+	"differentValueFloat": 65.635,
+	"sameOnBothBool": true,
+	"secondFileOnly_Country": "Austria"
 }

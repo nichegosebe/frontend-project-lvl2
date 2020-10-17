@@ -1,6 +1,6 @@
 {
-	"random": 28,
-	"random float": 99.117,
-	"bool": true,
+	"onlyFirstFileInteger": 28,
+	"differentValueFloat": 99.117,
+	"sameOnBothBool": true,
 	"date": "1997-08-31"
 }

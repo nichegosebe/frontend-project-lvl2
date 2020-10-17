@@ -1,5 +1,5 @@
 - val1: -1013740662
   integetValue: 423207
-  FLOAT: +181265.43322
-  sameBool: true
+  differentValueFloat: +181265.43322
+  sameOnBothBool: true
   null: 'notnull'
