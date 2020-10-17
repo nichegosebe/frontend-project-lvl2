@@ -1,4 +1,4 @@
-const genDiff = (object1, object2) => {
+export default (object1, object2) => {
   const diffString = Object.keys({ ...object1, ...object2 })
     .sort()
     .reduce((acc, key) => {
@@ -12,8 +12,7 @@ const genDiff = (object1, object2) => {
         return [...acc, ` - ${key}:${object1[key]}`, ` + ${key}:${object2[key]}`];
       }
       return [...acc, `   ${key}:${object1[key]}`];
-    }, []).join('\n ');
+    }, [])
+    .join('\n ');
   return `{\n ${diffString}\n}`;
 };
-
-export default genDiff;

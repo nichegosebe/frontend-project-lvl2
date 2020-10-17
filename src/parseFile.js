@@ -1,5 +1,4 @@
 import { existsSync, readFileSync } from 'fs';
-import genDiff from './gendiff.js';
 
 const isFfileExists = (filePath) => {
   try {
@@ -17,15 +16,12 @@ const readDataFromFile = (filePath) => {
     try {
       return readFileSync(filePath, 'UTF-8');
     } catch (err) {
-      console.error(`Error while reading JSON data from file ${filePath}`, err);
+      console.error(`Error reading JSON data from file ${filePath}`, err);
     }
+  } else {
+    console.error(`Error: file ${filePath} is not found!`);
   }
   return false;
 };
 
-export default (filePath1, filePath2) => {
-  const object1 = JSON.parse(readDataFromFile(filePath1));
-  const object2 = JSON.parse(readDataFromFile(filePath2));
-  if (!object1 || !object2) return false;
-  return genDiff(object1, object2);
-};
+export default (filePath) => JSON.parse(readDataFromFile(filePath));
