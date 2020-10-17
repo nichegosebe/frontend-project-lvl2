@@ -3,3 +3,4 @@
   secondFileOnly_Country: Austria
   differentValueFloat: +181265.43322
   sameOnBothBool: true
+  notSameBool: false
