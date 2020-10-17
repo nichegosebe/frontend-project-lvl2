@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test with flat and empty files: - two non-empty flat JSON files 1`] = `
+"{
+    bool:true
+  + country:Ukraine
+  - date:1997-08-31
+  + date:1998-12-18
+  - random:28
+  - random float:99.117
+  + random float:65.635
+}"
+`;
+
+exports[`Test with flat and empty files: - two non-empty flat YAML files 1`] = `
+"{
+  - FLOAT:-17886065.431222
+  + FLOAT:181265.43322
+  - bigValue:-1013740662
+  + biggestValue:21231013740662
+  - integetValue:4232907
+  + integetValue:423207
+  - notSameBool:true
+  - null:
+  + null:notnull
+    sameBool:true
+}"
+`;
+
+exports[`Test with flat and empty files: - two non-empty flat YAML files with different extensions 1`] = `
+"{
+  - FLOAT:-17886065.431222
+  + FLOAT:181265.43322
+  - bigValue:-1013740662
+  - integetValue:4232907
+  + integetValue:423207
+  - notSameBool:true
+  - null:
+  + null:notnull
+    sameBool:true
+  + val1:-1013740662
+}"
+`;
