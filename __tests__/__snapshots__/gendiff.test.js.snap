@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test genDiff: - two non-empty JSON files 1`] = `
+exports[`Tests with both non-empty fixtures .test with .ini format 1`] = `
 "{
     common: {
       + follow: false
+        sameArray: 1,2,3
         setting1: Value 1
       - setting2: 200
       - setting3: true
@@ -23,6 +24,8 @@ exports[`Test genDiff: - two non-empty JSON files 1`] = `
           + ops: vops
         }
     }
+  - differentArray: c,b,a
+  + differentArray: a,b,c
     group1: {
       - baz: bas
       + baz: bars
@@ -49,36 +52,86 @@ exports[`Test genDiff: - two non-empty JSON files 1`] = `
 }"
 `;
 
-exports[`Test genDiff: - two non-empty YAML files 1`] = `
+exports[`Tests with both non-empty fixtures .test with .json format 1`] = `
 "{
-  - bigValue: -1013740662
-  + biggestValue: 21231013740662
-  - differentValueFloat: -17886065.431222
-  + differentValueFloat: 181265.43322
-  - integetValue: 4232907
-  + integetValue: 423207
-  - notSameBool: true
-  + notSameBool: false
-  - null: 
-  - onlyFirstFileInteger: 213123444
-    sameOnBothBool: true
-  + secondFileOnly_Country: Austria
+    common: {
+      + follow: false
+        sameArray: 1,2,3
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: {
+            key: value
+        }
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow: too much
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
+    }
+  - differentArray: c,b,a
+  + differentArray: a,b,c
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
+    }
+  - group2: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
+  + group3: {
+        fee: 100500
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+    }
 }"
 `;
 
-exports[`Test genDiff: - two non-empty YAML files with different extensions 1`] = `
+exports[`Tests with both non-empty fixtures .test with .yaml format 1`] = `
 "{
-  - bigValue: -1013740662
-  - differentValueFloat: -17886065.431222
-  + differentValueFloat: 181265.43322
-  - integetValue: 4232907
-  + integetValue: 423207
-  - notSameBool: true
-  + notSameBool: false
-  - null: 
-  + null: notnull
-  - onlyFirstFileInteger: 213123444
-    sameOnBothBool: true
-  + val1: -1013740662
+    common: {
+      - array: 1,2,3
+      + sameArray: 1,2,3
+        setting1: Value 1
+        setting2: 200
+        setting3: true
+        setting6: {
+            doge: {
+                wow: too much
+            }
+            key: value
+        }
+    }
+  + differentArray: c,b,a
+    group1: {
+        baz: bas
+        foo: bar
+        nest: {
+            key: value
+        }
+    }
+    group2: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
 }"
 `;

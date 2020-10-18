@@ -1,5 +1,10 @@
 {
 	"common": {
+		"sameArray": [
+			1,
+			2,
+			3
+		],
 		"setting1": "Value 1",
 		"setting2": 200,
 		"setting3": true,
@@ -10,6 +15,11 @@
 			}
 		}
 	},
+	"differentArray": [
+		"c",
+		"b",
+		"a"
+	],
 	"group1": {
 		"baz": "bas",
 		"foo": "bar",
