@@ -1,4 +1,4 @@
-export const NO_CNANGED = ' ';
-export const UPDATED = 'x';
-export const REMOVED = '-';
-export const ADDED = '+';
+export const NO_CNANGED = 'noChanged';
+export const UPDATED = 'updated';
+export const REMOVED = 'removed';
+export const ADDED = 'added';

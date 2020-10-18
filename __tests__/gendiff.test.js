@@ -19,6 +19,7 @@ const fixtureSets = [
 
 const stylishDiffString = readFileSync(getFixturePath('stylish.txt'), 'UTF-8');
 const plainDiffString = readFileSync(getFixturePath('plain.txt'), 'UTF-8');
+const jsonDiffString = readFileSync(getFixturePath('out.json'), 'UTF-8');
 
 describe('Tests with both empty files', () => {
   test('empty files ', () => {
@@ -38,6 +39,12 @@ describe('Tests with both non-empty fixtures', () => {
   test.each(fixtureSets)('%s and %s with plain formatter', (fileName1, fileName2) => {
     expect(genDiff(getFixturePath(fileName1), getFixturePath(fileName2), 'plain')).toEqual(
       plainDiffString,
+    );
+  });
+
+  test.each(fixtureSets)('%s and %s with json formatter', (fileName1, fileName2) => {
+    expect(genDiff(getFixturePath(fileName1), getFixturePath(fileName2), 'json')).toEqual(
+      jsonDiffString,
     );
   });
 });
