@@ -7,35 +7,55 @@ const moduleFileName = fileURLToPath(import.meta.url);
 const absoluteDir = dirname(moduleFileName);
 const getFixturePath = (fileName) => join(absoluteDir, '..', '__tests__', '__fixtures__', fileName);
 
-const formats = [['.json'], ['.yaml'], ['.ini']];
+const fileFormats = [['.json'], ['.yaml'], ['.ini']];
 
-describe('Tests with empty fixtures', () => {
-  test.each(formats)(' with %s format', (format) => {
+describe('Tests with both empty fixtures', () => {
+  test.each(fileFormats)(' with %s format', (fileFormat) => {
     expect(
-      genDiff(getFixturePath(`empty${format}`), getFixturePath(`empty${format}`), 'stylish'),
+      genDiff(
+        getFixturePath(`empty${fileFormat}`),
+        getFixturePath(`empty${fileFormat}`),
+        'stylish',
+      ),
     ).toEqual('{}');
     expect(
-      genDiff(getFixturePath(`empty${format}`), getFixturePath(`empty${format}`), 'plain'),
+      genDiff(getFixturePath(`empty${fileFormat}`), getFixturePath(`empty${fileFormat}`), 'plain'),
     ).toEqual('');
   });
 });
 
 describe('Tests with both non-empty fixtures', () => {
-  test.each(formats)('with %s files, default (stylish) formatter', (format) => {
-    const diffStylish = genDiff(getFixturePath(`file1${format}`), getFixturePath(`file2${format}`));
+  test.each(fileFormats)('with %s files, default (stylish) formatter', (fileFormat) => {
+    const diffStylish = genDiff(
+      getFixturePath(`file1${fileFormat}`),
+      getFixturePath(`file2${fileFormat}`),
+    );
     expect(diffStylish).not.toEqual('{}');
     expect(diffStylish).not.toBeNull();
     expect(diffStylish).not.toBeUndefined();
     expect(diffStylish).toMatchSnapshot();
   });
 
-  test.each(formats)('with %s files, plain formatter', (format) => {
-    const diffStylish = genDiff(
-      getFixturePath(`file1${format}`),
-      getFixturePath(`file2${format}`),
+  test.each(fileFormats)('with %s files, plain formatter', (fileFormat) => {
+    const diffPlain = genDiff(
+      getFixturePath(`file1${fileFormat}`),
+      getFixturePath(`file2${fileFormat}`),
       'plain',
     );
-    expect(diffStylish).not.toEqual('');
+    expect(diffPlain).not.toEqual('');
+    expect(diffPlain).not.toBeNull();
+    expect(diffPlain).not.toBeUndefined();
+    expect(diffPlain).toMatchSnapshot();
+  });
+});
+
+describe('Tests with one non-empty fixtures', () => {
+  test.each(fileFormats)('with %s files, default (stylish) formatter', (fileFormat) => {
+    const diffStylish = genDiff(
+      getFixturePath(`empty${fileFormat}`),
+      getFixturePath(`file2${fileFormat}`),
+    );
+    expect(diffStylish).not.toEqual('{}');
     expect(diffStylish).not.toBeNull();
     expect(diffStylish).not.toBeUndefined();
     expect(diffStylish).toMatchSnapshot();
