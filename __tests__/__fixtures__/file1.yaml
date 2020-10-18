@@ -1,6 +1,6 @@
 ---
 common:
-  array:
+  sameArray:
     - 1
     - 2
     - 3
@@ -11,11 +11,16 @@ common:
     key: value
     doge:
       wow: too much
+differentArray:
+  - c
+  - b
+  - a
 group1:
   baz: bas
   foo: bar
   nest:
     key: value
+nullValue:
 group2:
   abc: 12345
   deep:

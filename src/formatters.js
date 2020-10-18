@@ -1,10 +1,11 @@
-const formatStylishObject = (objectToParse, whiteSpace = 0) => {
+const formatObjectStylish = (objectToParse, whiteSpace = 0) => {
   const indent = ' '.repeat(whiteSpace);
   if (objectToParse === null) return `${indent}  null`;
   const objectAsString = Object.entries(objectToParse)
     .map(([key, value]) => {
+      if (value === null) return `  ${indent}  ${key}: null`;
       if (typeof value === 'object' && !Array.isArray(value)) {
-        return `   ${indent} ${key}: ${formatStylishObject(value, whiteSpace + 4)}`;
+        return `   ${indent} ${key}: ${formatObjectStylish(value, whiteSpace + 4)}`;
       }
       return `  ${indent}  ${key}: ${value}`;
     })
@@ -23,7 +24,7 @@ const formatStylish = (diffArray, whiteSpace = 0) => {
       const [prefix, key, value, children] = item;
       if (children.length === 0) {
         if (typeof value === 'object' && !Array.isArray(value)) {
-          return `  ${indent}${prefix} ${key}: ${formatStylishObject(value, whiteSpace + 4)}`;
+          return `  ${indent}${prefix} ${key}: ${formatObjectStylish(value, whiteSpace + 4)}`;
         }
         return `  ${indent}${prefix} ${key}: ${value}`;
       }

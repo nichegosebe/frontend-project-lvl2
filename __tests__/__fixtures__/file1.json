@@ -27,6 +27,7 @@
 			"key": "value"
 		}
 	},
+	"nullValue": null,
 	"group2": {
 		"abc": 12345,
 		"deep": {

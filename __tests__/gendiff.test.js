@@ -4,8 +4,8 @@ import { fileURLToPath } from 'url';
 import genDiff from '../lib/index.js';
 
 const moduleFileName = fileURLToPath(import.meta.url);
-const absolutePath = dirname(moduleFileName);
-const getFixturePath = (fileName) => join(absolutePath, '..', '__tests__/__fixtures__', fileName);
+const absoluteDir = dirname(moduleFileName);
+const getFixturePath = (fileName) => join(absoluteDir, '..', '__tests__', '__fixtures__', fileName);
 
 const formats = [['.json'], ['.yaml'], ['.ini']];
 // const formatters = [['stylish'], ['plain']];

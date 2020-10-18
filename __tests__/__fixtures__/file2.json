@@ -33,7 +33,8 @@
 			"id": {
 				"number": 45
 			}
-		}
+		},
+		"anotherNullValue": null
 	},
 	"differentArray": [
 		"a",
