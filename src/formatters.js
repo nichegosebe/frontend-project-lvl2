@@ -13,6 +13,9 @@ const formatStylishObject = (objectToParse, whiteSpace = 0) => {
 };
 
 const formatStylish = (diffArray, whiteSpace = 0) => {
+  if (diffArray.length === 0) {
+    return '{}';
+  }
   const indent = ' '.repeat(whiteSpace);
   const arrayAsString = diffArray
     .map((item) => {
