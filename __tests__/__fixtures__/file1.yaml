@@ -1,9 +1,5 @@
 ---
 common:
-  sameArray:
-    - 1
-    - 2
-    - 3
   setting1: Value 1
   setting2: 200
   setting3: true

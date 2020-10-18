@@ -8,8 +8,8 @@ const arrayEquals = (array1, array2) => array1.length === array2.length
 const genDiff = (object1, object2) => Object.keys({ ...object1, ...object2 })
   .sort()
   .reduce((acc, key) => {
-    const value1 = object1[key] === null ? 'null' : object1[key];
-    const value2 = object2[key] === null ? 'null' : object2[key];
+    const value1 = object1[key];
+    const value2 = object2[key];
 
     if (isObject(value1) && isObject(value2)) {
       return [...acc, [STATE.NO_CNANGED, key, null, null, genDiff(value1, value2)]];

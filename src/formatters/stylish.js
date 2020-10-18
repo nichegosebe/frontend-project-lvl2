@@ -10,7 +10,7 @@ const formatValueStylish = (valueToParse, whiteSpacesCount = 0) => {
   const indent = whiteSpace.repeat(whiteSpacesCount + 1);
   const objectAsString = Object.entries(valueToParse)
     .map(([key, value]) => {
-      if (value === null) return `${indent}  ${key}: null`;
+      if (value === null) return `${indent}${whiteSpace}${key}: null`;
       if (typeof value === 'object' && !Array.isArray(value)) {
         return `${indent}${whiteSpace}${key}: ${formatValueStylish(value, whiteSpacesCount + 1)}`;
       }
