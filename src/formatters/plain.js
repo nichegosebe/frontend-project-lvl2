@@ -1,6 +1,7 @@
 import * as STATE from '../constants.js';
 
 const formatValuePlain = (valueToFormat) => {
+  if (valueToFormat === null) return 'null';
   if (typeof valueToFormat === 'object') return '[complex value]';
   if (typeof valueToFormat === 'string') return `'${valueToFormat}'`;
   return valueToFormat;
