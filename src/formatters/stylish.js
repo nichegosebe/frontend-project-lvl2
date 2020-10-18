@@ -20,19 +20,19 @@ const formatValueStylish = (valueToFormat, whiteSpacesCount = 0) => {
   return `{\n${objectAsString}\n${indent}}`;
 };
 
-const formatStylish = (diffAsArray, whiteSpacesCount = 0) => {
-  if (diffAsArray.length === 0) {
+const formatStylish = (diffTree, whiteSpacesCount = 0) => {
+  if (diffTree.length === 0) {
     return '{}';
   }
 
   const indent = whiteSpace.repeat(whiteSpacesCount);
 
-  const arrayAsString = diffAsArray
-    .map((item) => {
-      if (item.length === 0) {
+  const arrayAsString = diffTree
+    .map((node) => {
+      if (node.length === 0) {
         return [''];
       }
-      const [state, key, value, oldValue, children] = item;
+      const [state, key, value, oldValue, children] = node;
       if (children.length === 0) {
         switch (state) {
           case STATE.REMOVED: {

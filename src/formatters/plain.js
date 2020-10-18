@@ -7,12 +7,12 @@ const formatValuePlain = (valueToFormat) => {
   return valueToFormat;
 };
 
-const formatPlain = (diffAsArray, parentKeyPath = '') => {
-  if (diffAsArray.length === 0) {
+const formatPlain = (diffTree, parentKeyPath = '') => {
+  if (diffTree.length === 0) {
     return '';
   }
 
-  return diffAsArray
+  return diffTree
     .reduce((acc, item) => {
       const [state, key, value, oldValue, children] = item;
 
