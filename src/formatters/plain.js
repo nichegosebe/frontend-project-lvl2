@@ -1,17 +1,17 @@
 import * as STATE from '../constants.js';
 
-const formatValuePlain = (value) => {
-  if (typeof value === 'object') return '[complex value]';
-  if (typeof value === 'string') return `'${value}'`;
-  return value;
+const formatValuePlain = (valueToFormat) => {
+  if (typeof valueToFormat === 'object') return '[complex value]';
+  if (typeof valueToFormat === 'string') return `'${valueToFormat}'`;
+  return valueToFormat;
 };
 
-const formatPlain = (diffArray, parentKeyPath = '') => {
-  if (diffArray.length === 0) {
+const formatPlain = (diffAsArray, parentKeyPath = '') => {
+  if (diffAsArray.length === 0) {
     return '';
   }
 
-  return diffArray
+  return diffAsArray
     .reduce((acc, item) => {
       const [state, key, value, oldValue, children] = item;
 

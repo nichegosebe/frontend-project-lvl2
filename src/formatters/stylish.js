@@ -2,13 +2,13 @@ import * as STATE from '../constants.js';
 
 const whiteSpace = '    ';
 
-const formatValueStylish = (valueToParse, whiteSpacesCount = 0) => {
-  if (valueToParse === null) return 'null';
-  if (typeof valueToParse !== 'object') return `${valueToParse}`;
-  if (Array.isArray(valueToParse)) return `[${valueToParse}]`;
+const formatValueStylish = (valueToFormat, whiteSpacesCount = 0) => {
+  if (valueToFormat === null) return 'null';
+  if (typeof valueToFormat !== 'object') return `${valueToFormat}`;
+  if (Array.isArray(valueToFormat)) return `[${valueToFormat}]`;
 
   const indent = whiteSpace.repeat(whiteSpacesCount + 1);
-  const objectAsString = Object.entries(valueToParse)
+  const objectAsString = Object.entries(valueToFormat)
     .map(([key, value]) => {
       if (value === null) return `${indent}${whiteSpace}${key}: null`;
       if (typeof value === 'object' && !Array.isArray(value)) {
@@ -20,14 +20,14 @@ const formatValueStylish = (valueToParse, whiteSpacesCount = 0) => {
   return `{\n${objectAsString}\n${indent}}`;
 };
 
-const formatStylish = (diffArray, whiteSpacesCount = 0) => {
-  if (diffArray.length === 0) {
+const formatStylish = (diffAsArray, whiteSpacesCount = 0) => {
+  if (diffAsArray.length === 0) {
     return '{}';
   }
 
   const indent = whiteSpace.repeat(whiteSpacesCount);
 
-  const arrayAsString = diffArray
+  const arrayAsString = diffAsArray
     .map((item) => {
       if (item.length === 0) {
         return [''];
