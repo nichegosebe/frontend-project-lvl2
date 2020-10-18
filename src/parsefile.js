@@ -10,10 +10,7 @@ const readDataFromFile = (filePath) => {
 
 const jsonParser = (data) => JSON.parse(data);
 
-const yamlParser = (data) => {
-  const res = yaml.safeLoad(data);
-  return res && res.length > 0 ? res[0] : {};
-};
+const yamlParser = (data) => yaml.safeLoad(data);
 
 const iniParser = (data) => {
   const res = ini.parse(data);
