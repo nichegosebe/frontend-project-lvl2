@@ -8,28 +8,24 @@ const readDataFromFile = (filePath) => {
   return readFileSync(fullFilePath, 'UTF-8');
 };
 
-// const mapParser
-
-const jsonParser = (data) => JSON.parse(data);
-
-const yamlParser = (data) => yaml.safeLoad(data);
-
-const iniParser = (data) => ini.parse(data);
-
-export default (filePath) => {
-  const fileExtension = extname(filePath);
+const mapParser = (fileExtension) => {
   switch (fileExtension) {
     case '':
-      return jsonParser(readDataFromFile(filePath));
+      return JSON.parse;
     case '.json':
-      return jsonParser(readDataFromFile(filePath));
+      return JSON.parse;
     case '.yaml':
-      return yamlParser(readDataFromFile(filePath));
+      return yaml.safeLoad;
     case '.yml':
-      return yamlParser(readDataFromFile(filePath));
+      return yaml.safeLoad;
     case '.ini':
-      return iniParser(readDataFromFile(filePath));
+      return ini.parse;
     default:
-      throw new Error(`Unknown file format ${fileExtension}`);
+      throw new Error(`Unknown file extension ${fileExtension}`);
   }
+};
+
+export default (filePath) => {
+  const parse = mapParser(extname(filePath));
+  return parse(readDataFromFile(filePath));
 };

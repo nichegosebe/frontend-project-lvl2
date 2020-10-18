@@ -1,17 +1,20 @@
 import * as STATE from './constants.js';
 
-const formatValueStylish = (valueToParse, whiteSpaces = 0) => {
+const whiteSpace = '    ';
+
+const formatValueStylish = (valueToParse, whiteSpacesCount = 0) => {
   if (valueToParse === null) return 'null';
   if (typeof valueToParse !== 'object') return `${valueToParse}`;
   if (Array.isArray(valueToParse)) return `[${valueToParse}]`;
-  const indent = ' '.repeat(whiteSpaces + 4);
+
+  const indent = whiteSpace.repeat(whiteSpacesCount + 1);
   const objectAsString = Object.entries(valueToParse)
     .map(([key, value]) => {
       if (value === null) return `${indent}  ${key}: null`;
       if (typeof value === 'object' && !Array.isArray(value)) {
-        return `${indent}    ${key}: ${formatValueStylish(value, whiteSpaces + 4)}`;
+        return `${indent}${whiteSpace}${key}: ${formatValueStylish(value, whiteSpacesCount + 1)}`;
       }
-      return `${indent}    ${key}: ${value}`;
+      return `${indent}${whiteSpace}${key}: ${value}`;
     })
     .join('\n');
   return `{\n${objectAsString}\n${indent}}`;
@@ -23,12 +26,12 @@ const formatValuePlain = (value) => {
   return value;
 };
 
-const formatStylish = (diffArray, whiteSpaces = 0) => {
+const formatStylish = (diffArray, whiteSpacesCount = 0) => {
   if (diffArray.length === 0) {
     return '{}';
   }
 
-  const indent = ' '.repeat(whiteSpaces);
+  const indent = whiteSpace.repeat(whiteSpacesCount);
 
   const arrayAsString = diffArray
     .map((item) => {
@@ -39,23 +42,23 @@ const formatStylish = (diffArray, whiteSpaces = 0) => {
       if (children.length === 0) {
         switch (state) {
           case STATE.REMOVED: {
-            return `${indent}  - ${key}: ${formatValueStylish(value, whiteSpaces)}`;
+            return `${indent}  - ${key}: ${formatValueStylish(value, whiteSpacesCount)}`;
           }
           case STATE.ADDED: {
-            return `${indent}  + ${key}: ${formatValueStylish(value, whiteSpaces)}`;
+            return `${indent}  + ${key}: ${formatValueStylish(value, whiteSpacesCount)}`;
           }
           case STATE.UPDATED: {
             return [
-              `${indent}  - ${key}: ${formatValueStylish(oldValue, whiteSpaces)}`,
-              `${indent}  + ${key}: ${formatValueStylish(value, whiteSpaces)}`,
+              `${indent}  - ${key}: ${formatValueStylish(oldValue, whiteSpacesCount)}`,
+              `${indent}  + ${key}: ${formatValueStylish(value, whiteSpacesCount)}`,
             ].join('\n');
           }
           default: {
-            return `${indent}    ${key}: ${formatValueStylish(value, whiteSpaces)}`;
+            return `${indent}${whiteSpace}${key}: ${formatValueStylish(value, whiteSpacesCount)}`;
           }
         }
       }
-      return `${indent}    ${key}: ${formatStylish(children, whiteSpaces + 4)}`;
+      return `${indent}${whiteSpace}${key}: ${formatStylish(children, whiteSpacesCount + 1)}`;
     })
     .join('\n');
 
