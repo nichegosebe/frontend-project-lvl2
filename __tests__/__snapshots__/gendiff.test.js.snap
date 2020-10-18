@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tests with both non-empty fixtures .test with .ini format 1`] = `
+exports[`Tests with both non-empty fixtures with .ini files, default (stylish) formatter 1`] = `
 "{
     common: {
       + follow: false
-        sameArray: 1,2,3
+        sameArray: [1,2,3]
         setting1: Value 1
       - setting2: 200
       - setting3: true
@@ -24,8 +24,8 @@ exports[`Tests with both non-empty fixtures .test with .ini format 1`] = `
           + ops: vops
         }
     }
-  - differentArray: c,b,a
-  + differentArray: a,b,c
+  - differentArray: [c,b,a]
+  + differentArray: [a,b,c]
     group1: {
       - baz: bas
       + baz: bars
@@ -43,7 +43,7 @@ exports[`Tests with both non-empty fixtures .test with .ini format 1`] = `
     }
   + group3: {
         fee: 100500
-        anotherNullValue: null
+      anotherNullValue: null
         deep: {
             id: {
                 number: 45
@@ -54,11 +54,27 @@ exports[`Tests with both non-empty fixtures .test with .ini format 1`] = `
 }"
 `;
 
-exports[`Tests with both non-empty fixtures .test with .json format 1`] = `
+exports[`Tests with both non-empty fixtures with .ini files, plain formatter 1`] = `
+"Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
+Property 'common.setting3' was updated. From true to [complex value]
+Property 'common.setting4' was added with value: 'blah blah'
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From 'too much' to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
+Property 'differentArray' was updated. From [complex value] to [complex value]
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group1.nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]
+Property 'nullValue' was removed"
+`;
+
+exports[`Tests with both non-empty fixtures with .json files, default (stylish) formatter 1`] = `
 "{
     common: {
       + follow: false
-        sameArray: 1,2,3
+        sameArray: [1,2,3]
         setting1: Value 1
       - setting2: 200
       - setting3: true
@@ -78,8 +94,8 @@ exports[`Tests with both non-empty fixtures .test with .json format 1`] = `
           + ops: vops
         }
     }
-  - differentArray: c,b,a
-  + differentArray: a,b,c
+  - differentArray: [c,b,a]
+  + differentArray: [a,b,c]
     group1: {
       - baz: bas
       + baz: bars
@@ -102,17 +118,33 @@ exports[`Tests with both non-empty fixtures .test with .json format 1`] = `
                 number: 45
             }
         }
-        anotherNullValue: null
+      anotherNullValue: null
     }
   - nullValue: null
 }"
 `;
 
-exports[`Tests with both non-empty fixtures .test with .yaml format 1`] = `
+exports[`Tests with both non-empty fixtures with .json files, plain formatter 1`] = `
+"Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
+Property 'common.setting3' was updated. From true to [complex value]
+Property 'common.setting4' was added with value: 'blah blah'
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From 'too much' to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
+Property 'differentArray' was updated. From [complex value] to [complex value]
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group1.nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]
+Property 'nullValue' was removed"
+`;
+
+exports[`Tests with both non-empty fixtures with .yaml files, default (stylish) formatter 1`] = `
 "{
     common: {
       + follow: false
-        sameArray: 1,2,3
+        sameArray: [1,2,3]
         setting1: Value 1
       - setting2: 200
       - setting3: true
@@ -132,8 +164,8 @@ exports[`Tests with both non-empty fixtures .test with .yaml format 1`] = `
           + ops: vops
         }
     }
-  - differentArray: c,b,a
-  + differentArray: a,b,c
+  - differentArray: [c,b,a]
+  + differentArray: [a,b,c]
     group1: {
       - baz: bas
       + baz: bars
@@ -156,8 +188,24 @@ exports[`Tests with both non-empty fixtures .test with .yaml format 1`] = `
                 number: 45
             }
         }
-        anotherNullValue: null
+      anotherNullValue: null
     }
   - nullValue: null
 }"
+`;
+
+exports[`Tests with both non-empty fixtures with .yaml files, plain formatter 1`] = `
+"Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
+Property 'common.setting3' was updated. From true to [complex value]
+Property 'common.setting4' was added with value: 'blah blah'
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From 'too much' to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
+Property 'differentArray' was updated. From [complex value] to [complex value]
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group1.nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]
+Property 'nullValue' was removed"
 `;
