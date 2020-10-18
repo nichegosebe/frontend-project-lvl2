@@ -1,5 +1,6 @@
 const isObject = (value) => typeof value === 'object' && !Array.isArray(value);
-const arrayEquals = (array1, array2) => array1.length === array2.length && array1.every((val, index) => val === array2[index]);
+const arrayEquals = (array1, array2) => array1.length === array2.length
+  && array1.every((val, index) => val === array2[index]);
 
 const genDiff = (object1, object2) => Object.keys({ ...object1, ...object2 })
   .sort()

@@ -8,7 +8,7 @@ const absolutePath = dirname(moduleFileName);
 const getFixturePath = (fileName) => join(absolutePath, '..', '__tests__/__fixtures__', fileName);
 
 const formats = [['.json'], ['.yaml'], ['.ini']];
-const formatters = [['stylish'], ['plain']];
+// const formatters = [['stylish'], ['plain']];
 
 describe('Tests with empty fixtures', () => {
   test.each(formats)('.test with %s format', (format) => {
@@ -27,13 +27,3 @@ describe('Tests with both non-empty fixtures', () => {
     expect(diff).toMatchSnapshot();
   });
 });
-
-// describe('Snapshot tests with both non-empty fixtures', () => {
-//   test.each(bothNonEmptyFixtures)('.test with %s, %s', (file1, file2) => {
-//     const diff = genDiff(getFixturePath(file1), getFixturePath(file2));
-//     expect(diff).not.toEqual('{}');
-//     expect(diff).not.toBeNull();
-//     expect(diff).not.toBeUndefined();
-//     expect(diff).toMatchSnapshot();
-//   });
-// });
