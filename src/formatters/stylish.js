@@ -27,7 +27,7 @@ const formatStylish = (diffTree, whiteSpacesCount = 0) => {
 
   const indent = whiteSpace.repeat(whiteSpacesCount);
 
-  const arrayAsString = diffTree
+  const formatTree = diffTree
     .map((node) => {
       if (node.length === 0) {
         return [''];
@@ -56,7 +56,7 @@ const formatStylish = (diffTree, whiteSpacesCount = 0) => {
     })
     .join('\n');
 
-  return `{\n${arrayAsString}\n${indent}}`;
+  return `{\n${formatTree}\n${indent}}`;
 };
 
 export default formatStylish;
