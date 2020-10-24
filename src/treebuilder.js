@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const STATE = {
   UNCHANGED: 'unchanged',
   UPDATED: 'updated',
@@ -5,42 +7,40 @@ const STATE = {
   ADDED: 'added',
 };
 
-const isObject = (value) => typeof value === 'object' && !Array.isArray(value) && value !== null;
-
-function arraysIsEquals(array1, array2) {
-  return array1.length === array2.length && array1.every((val, index) => val === array2[index]);
-}
-
 const buildTree = (object1, object2) => Object.keys({ ...object1, ...object2 })
   .sort()
   .reduce((acc, key) => {
-    const value1 = object1[key];
-    const value2 = object2[key];
+    const oldValue = object1[key];
+    const newValue = object2[key];
 
-    if (isObject(value1) && isObject(value2)) {
-      return [...acc, [STATE.UNCHANGED, key, null, null, buildTree(value1, value2)]];
+    if (_.isPlainObject(oldValue) && _.isPlainObject(newValue)) {
+      return [...acc, { state: STATE.UNCHANGED, key, children: buildTree(oldValue, newValue) }];
     }
 
-    if (Array.isArray(value1) && Array.isArray(value2)) {
-      if (arraysIsEquals(value1, value2)) {
-        return [...acc, [STATE.UNCHANGED, key, value1, null, []]];
+    if (_.isUndefined(newValue)) {
+      return [...acc, { state: STATE.REMOVED, key, oldValue }];
+    }
+
+    if (_.isUndefined(oldValue)) {
+      return [...acc, { state: STATE.ADDED, key, newValue }];
+    }
+
+    if (oldValue !== newValue) {
+      if (_.isArray(oldValue) && _.isArray(newValue) && _.isEqual(oldValue, newValue)) {
+        return [...acc, { state: STATE.UNCHANGED, key, oldValue }];
       }
-      return [...acc, [STATE.UPDATED, key, value2, value1, []]];
+      return [
+        ...acc,
+        {
+          state: STATE.UPDATED,
+          key,
+          oldValue,
+          newValue,
+        },
+      ];
     }
 
-    if (value2 === undefined) {
-      return [...acc, [STATE.REMOVED, key, value1, null, []]];
-    }
-
-    if (value1 === undefined) {
-      return [...acc, [STATE.ADDED, key, value2, null, []]];
-    }
-
-    if (value1 !== value2) {
-      return [...acc, [STATE.UPDATED, key, value2, value1, []]];
-    }
-
-    return [...acc, [STATE.UNCHANGED, key, value1, null, []]];
+    return [...acc, { state: STATE.UNCHANGED, key, oldValue }];
   }, []);
 
 export { buildTree, STATE };

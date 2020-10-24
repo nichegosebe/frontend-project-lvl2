@@ -1,7 +1,7 @@
-import { STATE } from '../treebuilder.js';
+import { STATE } from '../treebuilder';
 
-const whiteSpaces = 4;
-const whiteSpace = ' '.repeat(whiteSpaces);
+const whiteSpaceWidth = 4;
+const whiteSpace = ' '.repeat(whiteSpaceWidth);
 
 const formatValueStylish = (valueToFormat, level = 0) => {
   if (valueToFormat === null) return 'null';
@@ -21,43 +21,45 @@ const formatValueStylish = (valueToFormat, level = 0) => {
   return `{\n${objectAsString}\n${indent}}`;
 };
 
-const formatStylish = (diffTree, level = 0) => {
+const formatDiffTreeStylish = (diffTree, level = 0) => {
   if (diffTree.length === 0) {
     return '{}';
   }
 
   const indent = whiteSpace.repeat(level);
 
-  const formatTree = diffTree
+  const formattedTree = diffTree
     .map((node) => {
       if (node.length === 0) {
         return [''];
       }
-      const [state, key, value, oldValue, children] = node;
-      if (children.length === 0) {
+      const {
+        state, key, newValue, oldValue, children,
+      } = node;
+      if (!children) {
         switch (state) {
           case STATE.REMOVED: {
-            return `${indent}  - ${key}: ${formatValueStylish(value, level)}`;
+            return `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`;
           }
           case STATE.ADDED: {
-            return `${indent}  + ${key}: ${formatValueStylish(value, level)}`;
+            return `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`;
           }
           case STATE.UPDATED: {
             return [
               `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`,
-              `${indent}  + ${key}: ${formatValueStylish(value, level)}`,
+              `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`,
             ].join('\n');
           }
           default: {
-            return `${indent}${whiteSpace}${key}: ${formatValueStylish(value, level)}`;
+            return `${indent}${whiteSpace}${key}: ${formatValueStylish(oldValue, level)}`;
           }
         }
       }
-      return `${indent}${whiteSpace}${key}: ${formatStylish(children, level + 1)}`;
+      return `${indent}${whiteSpace}${key}: ${formatDiffTreeStylish(children, level + 1)}`;
     })
     .join('\n');
 
-  return `{\n${formatTree}\n${indent}}`;
+  return `{\n${formattedTree}\n${indent}}`;
 };
 
-export default formatStylish;
+export default formatDiffTreeStylish;
