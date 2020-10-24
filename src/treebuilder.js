@@ -1,20 +1,24 @@
-import * as STATE from './constants.js';
+const STATE = {
+  UNCHANGED: 'unchanged',
+  UPDATED: 'updated',
+  REMOVED: 'removed',
+  ADDED: 'added',
+};
 
-const isObject = (value) => typeof value === 'object'
-  && !Array.isArray(value)
-  && value !== null;
+const isObject = (value) => typeof value === 'object' && !Array.isArray(value) && value !== null;
 
-const arraysIsEquals = (array1, array2) => array1.length === array2.length
-  && array1.every((val, index) => val === array2[index]);
+function arraysIsEquals(array1, array2) {
+  return array1.length === array2.length && array1.every((val, index) => val === array2[index]);
+}
 
-const buidTree = (object1, object2) => Object.keys({ ...object1, ...object2 })
+const buildTree = (object1, object2) => Object.keys({ ...object1, ...object2 })
   .sort()
   .reduce((acc, key) => {
     const value1 = object1[key];
     const value2 = object2[key];
 
     if (isObject(value1) && isObject(value2)) {
-      return [...acc, [STATE.UNCHANGED, key, null, null, buidTree(value1, value2)]];
+      return [...acc, [STATE.UNCHANGED, key, null, null, buildTree(value1, value2)]];
     }
 
     if (Array.isArray(value1) && Array.isArray(value2)) {
@@ -39,4 +43,4 @@ const buidTree = (object1, object2) => Object.keys({ ...object1, ...object2 })
     return [...acc, [STATE.UNCHANGED, key, value1, null, []]];
   }, []);
 
-export default buidTree;
+export { buildTree, STATE };

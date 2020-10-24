@@ -1,8 +1,14 @@
 import formatPlain from './plain.js';
 import formatStylish from './stylish.js';
 
-export default (formatName) => {
-  if (formatName === 'plain') return formatPlain;
-  if (formatName === 'json') return JSON.stringify;
-  return formatStylish;
+const mapFormat = {
+  plain: formatPlain,
+  stylish: formatStylish,
+  json: JSON.stringify,
+};
+
+export default (data, formatName) => {
+  const formatTree = mapFormat[formatName];
+  if (!formatTree) throw new Error(`Unknown format name: ${formatName}`);
+  return formatTree(data);
 };

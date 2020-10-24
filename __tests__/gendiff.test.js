@@ -1,12 +1,9 @@
 import { describe, test, expect } from '@jest/globals';
 import { readFileSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 import genDiff from '../lib/index.js';
 
-const moduleFilePath = fileURLToPath(import.meta.url);
-const absoluteDir = dirname(moduleFilePath);
-const getFixturePath = (fileName) => join(absoluteDir, '..', '__tests__', '__fixtures__', fileName);
+const getFixturePath = (fileName) => join(process.cwd(), '__tests__', '__fixtures__', fileName);
 
 const fixtureSets = [
   ['file1.json', 'file2.json'],
