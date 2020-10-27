@@ -1,39 +1,36 @@
 import _ from 'lodash';
-import { STATE } from '../treebuilder';
+import { STATES } from '../treebuilder';
 
-const formatValuePlain = (valueToFormat) => {
+const formatValue = (valueToFormat) => {
   if (valueToFormat === null) return 'null';
   if (_.isObject(valueToFormat)) return '[complex value]';
   if (_.isString(valueToFormat)) return `'${valueToFormat}'`;
   return valueToFormat;
 };
 
-const formatDiffTreePlain = (diffTree, parentKeyPath = '') => diffTree
+const formatDiffTreePlain = (diffTree, path = '') => diffTree
   .reduce((acc, node) => {
     const {
       state, key, oldValue, newValue, children,
     } = node;
 
-    if (children) return [...acc, formatDiffTreePlain(children, `${parentKeyPath}${key}.`)];
+    if (children) return [...acc, formatDiffTreePlain(children, `${path}${key}.`)];
 
-    if (state === STATE.REMOVED) {
-      return [...acc, `Property '${parentKeyPath}${key}' was removed`];
+    if (state === STATES.REMOVED) {
+      return [...acc, `Property '${path}${key}' was removed`];
     }
 
-    if (state === STATE.UPDATED) {
+    if (state === STATES.UPDATED) {
       return [
         ...acc,
-        `Property '${parentKeyPath}${key}' was updated. From ${formatValuePlain(
-          oldValue,
-        )} to ${formatValuePlain(newValue)}`,
+        `Property '${path}${key}' was updated. From ${formatValue(oldValue)} to ${formatValue(
+          newValue,
+        )}`,
       ];
     }
 
-    if (state === STATE.ADDED) {
-      return [
-        ...acc,
-        `Property '${parentKeyPath}${key}' was added with value: ${formatValuePlain(newValue)}`,
-      ];
+    if (state === STATES.ADDED) {
+      return [...acc, `Property '${path}${key}' was added with value: ${formatValue(newValue)}`];
     }
 
     return acc;
