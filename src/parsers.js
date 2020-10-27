@@ -13,7 +13,7 @@ const numberify = (data) => Object.entries(data).reduce((acc, [key, value]) => {
 
 const parseIni = (data) => numberify(ini.parse(data));
 
-const mapParse = {
+const parsers = {
   json: JSON.parse,
   yaml: yaml.safeLoad,
   ini: parseIni,
@@ -24,7 +24,7 @@ export default (data, dataType) => {
     throw new Error('Cannot parse: data type is undefined!');
   }
 
-  const parse = dataType ? mapParse[dataType.toLowerCase()] : mapParse.json;
+  const parse = dataType ? parsers[dataType.toLowerCase()] : parsers.json;
 
   if (!parse) {
     throw new Error(`Cannot parse: unknown data type: ${dataType}`);
