@@ -1,7 +1,14 @@
-import { readDataFromFile, readTypeFromExtension } from '../src/fileread';
-import { buildTree } from '../src/treebuilder';
-import parse from '../src/parsers';
-import format from '../src/formatters/index';
+import { readFileSync } from 'fs';
+import { resolve, extname } from 'path';
+import { buildTree } from './treebuilder';
+import parse from './parsers';
+import format from './formatters/index';
+
+const absolutePath = (filePath) => resolve(process.cwd(), filePath);
+
+export const readDataFromFile = (filePath) => readFileSync(absolutePath(filePath), 'UTF-8');
+
+export const readTypeFromExtension = (filePath) => extname(filePath).slice(1);
 
 export default (filePath1, filePath2, formatName = 'stylish') => {
   const rawData1 = readDataFromFile(filePath1);
