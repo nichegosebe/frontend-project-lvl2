@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const STATE = {
+const STATES = {
   UNCHANGED: 'unchanged',
   UPDATED: 'updated',
   REMOVED: 'removed',
@@ -14,25 +14,22 @@ const buildTree = (object1, object2) => Object.keys({ ...object1, ...object2 })
     const newValue = object2[key];
 
     if (_.isPlainObject(oldValue) && _.isPlainObject(newValue)) {
-      return [...acc, { state: STATE.UNCHANGED, key, children: buildTree(oldValue, newValue) }];
+      return [...acc, { state: STATES.UNCHANGED, key, children: buildTree(oldValue, newValue) }];
     }
 
-    if (_.isUndefined(newValue)) {
-      return [...acc, { state: STATE.REMOVED, key, oldValue }];
+    if (!_.has(object2, key)) {
+      return [...acc, { state: STATES.REMOVED, key, oldValue }];
     }
 
-    if (_.isUndefined(oldValue)) {
-      return [...acc, { state: STATE.ADDED, key, newValue }];
+    if (!_.has(object1, key)) {
+      return [...acc, { state: STATES.ADDED, key, newValue }];
     }
 
-    if (oldValue !== newValue) {
-      if (_.isArray(oldValue) && _.isArray(newValue) && _.isEqual(oldValue, newValue)) {
-        return [...acc, { state: STATE.UNCHANGED, key, oldValue }];
-      }
+    if (!_.isEqual(oldValue, newValue)) {
       return [
         ...acc,
         {
-          state: STATE.UPDATED,
+          state: STATES.UPDATED,
           key,
           oldValue,
           newValue,
@@ -40,7 +37,7 @@ const buildTree = (object1, object2) => Object.keys({ ...object1, ...object2 })
       ];
     }
 
-    return [...acc, { state: STATE.UNCHANGED, key, oldValue }];
+    return [...acc, { state: STATES.UNCHANGED, key, oldValue }];
   }, []);
 
-export { buildTree, STATE };
+export { buildTree, STATES };
