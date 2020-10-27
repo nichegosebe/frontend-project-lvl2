@@ -21,8 +21,6 @@ const jsonDiffString = readFileSync(getFixturePath('json.txt'), 'UTF-8');
 describe('Tests with both empty files', () => {
   test('empty files ', () => {
     expect(genDiff(getFixturePath('empty.json'), getFixturePath('empty.json'))).toEqual('{}\n');
-    expect(genDiff(getFixturePath('empty.yaml'), getFixturePath('empty.yaml'))).toEqual('{}\n');
-    expect(genDiff(getFixturePath('empty.ini'), getFixturePath('empty.ini'))).toEqual('{}\n');
   });
 });
 
