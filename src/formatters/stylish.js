@@ -36,7 +36,7 @@ const formatDiffTreeStylish = (diffTree, level = 0) => {
       const {
         state, key, newValue, oldValue, children,
       } = node;
-      if (!_.isArray(children)) {
+      if (!children) {
         switch (state) {
           case STATES.REMOVED: {
             return `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`;
