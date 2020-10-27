@@ -1,7 +1,7 @@
 import { describe, test, expect } from '@jest/globals';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import genDiff from '../lib/index.js';
+import genDiff from '../lib/gendiff';
 
 const getFixturePath = (fileName) => join(process.cwd(), '__tests__', '__fixtures__', fileName);
 
