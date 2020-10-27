@@ -16,15 +16,16 @@ const parseIni = (data) => numberify(ini.parse(data));
 const parsers = {
   json: JSON.parse,
   yaml: yaml.safeLoad,
+  yml: yaml.safeLoad,
   ini: parseIni,
 };
 
 export default (data, dataType) => {
   if (dataType === undefined) {
-    throw new Error('Cannot parse: data type is undefined!');
+    throw new Error('Cannot parse undefined data type!');
   }
 
-  const parse = dataType ? parsers[dataType.toLowerCase()] : parsers.json;
+  const parse = dataType === '' ? parsers.json : parsers[dataType];
 
   if (!parse) {
     throw new Error(`Cannot parse: unknown data type: ${dataType}`);
