@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { STATES } from '../treebuilder';
+import { STATES } from '../treebuilder.js';
 
 const formatValue = (valueToFormat) => {
   if (valueToFormat === null) return 'null';

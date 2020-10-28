@@ -1,8 +1,8 @@
 import { readFileSync } from 'fs';
 import { resolve, extname } from 'path';
-import { buildTree } from './treebuilder';
-import parse from './parsers';
-import format from './formatters/index';
+import { buildTree } from './treebuilder.js';
+import parse from './parsers.js';
+import format from './formatters/index.js';
 
 const absolutePath = (filePath) => resolve(process.cwd(), filePath);
 

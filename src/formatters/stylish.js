@@ -1,4 +1,4 @@
-import { STATES } from '../treebuilder';
+import { STATES } from '../treebuilder.js';
 
 const whiteSpaceWidth = 4;
 const whiteSpace = ' '.repeat(whiteSpaceWidth);
