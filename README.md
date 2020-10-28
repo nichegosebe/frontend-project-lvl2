@@ -1,9 +1,9 @@
 # Gendiff: generator of differences
 
-Compares two configuration files: JSON, ini or YAML, and shows the difference.
-New data structure contains differences (including unchanged).
+Compares two configuration files: JSON, ini or YAML. Return new data structure
+contains differences (including unchanged).
 
-[![Build and eslint test](https://github.com/nichegosebe/frontend-project-lvl2/workflows/Build%20and%20eslint%20test/badge.svg)]https://github.com/nichegosebe/frontend-project-lvl2/actions
+[![Build and eslint test](https://github.com/nichegosebe/frontend-project-lvl2/workflows/Build%20and%20eslint%20test/badge.svg)](https://github.com/nichegosebe/frontend-project-lvl2/actions)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/6d8685d6f03ce866868d/maintainability)](https://codeclimate.com/github/nichegosebe/frontend-project-lvl2/maintainability)
 
@@ -20,7 +20,7 @@ Can be used as a library or as CLI util.
 
 npm install
 
-## Usage as cli-command
+## Usage as cli utilite
 
 Usage: gendiff [options] <filepath1> <filepath2>
 
@@ -33,4 +33,4 @@ format (default: "stylish") -h, --help display help for command
 
 import genDiff from 'gendiff';
 
-genDiff(<filePath1>, <filePath2>, <format>);
+genDiff(filePath1, filePath2, format);
