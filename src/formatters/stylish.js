@@ -36,26 +36,26 @@ const formatDiffTreeStylish = (diffTree, level = 0) => {
       const {
         state, key, newValue, oldValue, children,
       } = node;
-      if (!children) {
-        switch (state) {
-          case STATES.REMOVED: {
-            return `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`;
-          }
-          case STATES.ADDED: {
-            return `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`;
-          }
-          case STATES.UPDATED: {
-            return [
-              `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`,
-              `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`,
-            ].join('\n');
-          }
-          default: {
-            return `${indent}${whiteSpace}${key}: ${formatValueStylish(oldValue, level)}`;
-          }
+
+      if (children) return `${indent}${whiteSpace}${key}: ${formatDiffTreeStylish(children, level + 1)}`;
+
+      switch (state) {
+        case STATES.REMOVED: {
+          return `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`;
+        }
+        case STATES.ADDED: {
+          return `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`;
+        }
+        case STATES.UPDATED: {
+          return [
+            `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`,
+            `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`,
+          ].join('\n');
+        }
+        default: {
+          return `${indent}${whiteSpace}${key}: ${formatValueStylish(oldValue, level)}`;
         }
       }
-      return `${indent}${whiteSpace}${key}: ${formatDiffTreeStylish(children, level + 1)}`;
     })
     .join('\n');
 
