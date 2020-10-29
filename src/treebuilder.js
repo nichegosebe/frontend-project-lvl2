@@ -5,6 +5,7 @@ const STATES = {
   UPDATED: 'updated',
   REMOVED: 'removed',
   ADDED: 'added',
+  NESTED: 'nested',
 };
 
 const buildTree = (object1, object2) => Object.keys({ ...object1, ...object2 })
@@ -14,7 +15,7 @@ const buildTree = (object1, object2) => Object.keys({ ...object1, ...object2 })
     const newValue = object2[key];
 
     if (_.isPlainObject(oldValue) && _.isPlainObject(newValue)) {
-      return [...acc, { state: STATES.UNCHANGED, key, children: buildTree(oldValue, newValue) }];
+      return [...acc, { state: STATES.NESTED, key, children: buildTree(oldValue, newValue) }];
     }
 
     if (!_.has(object2, key)) {
