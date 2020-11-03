@@ -1,22 +1,23 @@
 import { readFileSync } from 'fs';
 import { resolve, extname } from 'path';
-import { buildTree } from './treebuilder.js';
+import buildTree from './treebuilder.js';
 import parse from './parsers.js';
 import format from './formatters/index.js';
 
-const absolutePath = (filePath) => resolve(process.cwd(), filePath);
+const getAbsolutePath = (filePath) => resolve(process.cwd(), filePath);
 
-export const readDataFromFile = (filePath) => readFileSync(absolutePath(filePath), 'UTF-8');
+const getData = (filePath) => readFileSync(getAbsolutePath(filePath), 'UTF-8');
 
-export const readTypeFromExtension = (filePath) => extname(filePath).slice(1);
+const getType = (filePath) => extname(filePath).slice(1);
 
 export default (filePath1, filePath2, formatName = 'stylish') => {
-  const rawData1 = readDataFromFile(filePath1);
-  const rawData2 = readDataFromFile(filePath2);
-  const dataType1 = readTypeFromExtension(filePath1);
-  const dataType2 = readTypeFromExtension(filePath2);
+  const dataType1 = getType(filePath1);
+  const dataType2 = getType(filePath2);
 
-  const tree = buildTree(parse(rawData1, dataType1), parse(rawData2, dataType2));
+  const data1 = parse(getData(filePath1), dataType1);
+  const data2 = parse(getData(filePath2), dataType2);
+
+  const tree = buildTree(data1, data2);
 
   return `${format(tree, formatName)}\n`;
 };
