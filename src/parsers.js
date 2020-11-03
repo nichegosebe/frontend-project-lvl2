@@ -18,14 +18,11 @@ const parsers = {
   yaml: yaml.safeLoad,
   yml: yaml.safeLoad,
   ini: parseIni,
+  default: false,
 };
 
 export default (data, dataType) => {
-  if (dataType === undefined) {
-    throw new Error('Cannot parse undefined data type!');
-  }
-
-  const parse = dataType === '' ? parsers.json : parsers[dataType];
+  const parse = parsers[dataType];
 
   if (!parse) {
     throw new Error(`Cannot parse: unknown data type: ${dataType}`);
