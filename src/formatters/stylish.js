@@ -1,4 +1,4 @@
-import { STATES } from '../treebuilder.js';
+import { TYPES } from '../treebuilder.js';
 
 const whiteSpaceWidth = 4;
 const whiteSpace = ' '.repeat(whiteSpaceWidth);
@@ -38,16 +38,16 @@ const formatDiffTreeStylish = (diffTree, level = 0) => {
       } = node;
 
       switch (state) {
-        case STATES.NESTED: {
+        case TYPES.NESTED: {
           return `${indent}${whiteSpace}${key}: ${formatDiffTreeStylish(children, level + 1)}`;
         }
-        case STATES.REMOVED: {
+        case TYPES.REMOVED: {
           return `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`;
         }
-        case STATES.ADDED: {
+        case TYPES.ADDED: {
           return `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`;
         }
-        case STATES.UPDATED: {
+        case TYPES.UPDATED: {
           return [
             `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`,
             `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`,

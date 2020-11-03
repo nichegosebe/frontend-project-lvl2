@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { STATES } from '../treebuilder.js';
+import { TYPES } from '../treebuilder.js';
 
 const formatValue = (valueToFormat) => {
   if (valueToFormat === null) return 'null';
@@ -15,10 +15,10 @@ const formatDiffTreePlain = (diffTree, path = '') => diffTree
     } = node;
 
     switch (state) {
-      case STATES.REMOVED: {
+      case TYPES.REMOVED: {
         return [...acc, `Property '${path}${key}' was removed`];
       }
-      case STATES.UPDATED: {
+      case TYPES.UPDATED: {
         return [
           ...acc,
           `Property '${path}${key}' was updated. From ${formatValue(oldValue)} to ${formatValue(
@@ -26,13 +26,13 @@ const formatDiffTreePlain = (diffTree, path = '') => diffTree
           )}`,
         ];
       }
-      case STATES.ADDED: {
+      case TYPES.ADDED: {
         return [
           ...acc,
           `Property '${path}${key}' was added with value: ${formatValue(newValue)}`,
         ];
       }
-      case STATES.NESTED: {
+      case TYPES.NESTED: {
         return [...acc, formatDiffTreePlain(children, `${path}${key}.`)];
       }
 
