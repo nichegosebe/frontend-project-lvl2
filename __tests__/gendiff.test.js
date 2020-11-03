@@ -1,7 +1,7 @@
 import { describe, test, expect } from '@jest/globals';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import genDiff from '../lib/gendiff';
+import genDiff from '../index';
 
 const getFixturePath = (fileName) => join(process.cwd(), '__tests__', '__fixtures__', fileName);
 
@@ -10,7 +10,7 @@ const fixtureSets = [
   ['file1.yaml', 'file2.yaml'],
   ['file1.ini', 'file2.ini'],
   ['file1.ini', 'file2.json'],
-  ['file1.yaml', 'file2'],
+  ['file1.yaml', 'file2.json'],
   ['file1.yaml', 'file2.ini'],
 ];
 
