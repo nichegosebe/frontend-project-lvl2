@@ -1,27 +1,27 @@
+import _ from 'lodash';
 import { TYPES } from '../treebuilder.js';
 
 const whiteSpaceWidth = 4;
 const whiteSpace = ' '.repeat(whiteSpaceWidth);
 
-const formatValueStylish = (valueToFormat, level = 0) => {
-  if (valueToFormat === null) return 'null';
-  if (typeof valueToFormat !== 'object') return `${valueToFormat}`;
-  if (Array.isArray(valueToFormat)) return `[${valueToFormat}]`;
+const formatValue = (value, level = 0) => {
+  if (Array.isArray(value)) return `[${value}]`;
+  if (!_.isPlainObject(value)) return `${value}`;
 
   const indent = whiteSpace.repeat(level + 1);
-  const objectAsString = Object.entries(valueToFormat)
-    .map(([key, value]) => {
-      if (value === null) return `${indent}${whiteSpace}${key}: null`;
-      if (typeof value === 'object' && !Array.isArray(value)) {
-        return `${indent}${whiteSpace}${key}: ${formatValueStylish(value, level + 1)}`;
+  const objectAsString = Object.entries(value)
+    .map(([key, innerValue]) => {
+      if (innerValue === null) return `${indent}${whiteSpace}${key}: null`;
+      if (typeof innerValue === 'object' && !Array.isArray(innerValue)) {
+        return `${indent}${whiteSpace}${key}: ${formatValue(innerValue, level + 1)}`;
       }
-      return `${indent}${whiteSpace}${key}: ${value}`;
+      return `${indent}${whiteSpace}${key}: ${innerValue}`;
     })
     .join('\n');
   return `{\n${objectAsString}\n${indent}}`;
 };
 
-const formatDiffTreeStylish = (diffTree, level = 0) => {
+const format = (diffTree, level = 0) => {
   if (diffTree.length === 0) {
     return '{}';
   }
@@ -30,31 +30,28 @@ const formatDiffTreeStylish = (diffTree, level = 0) => {
 
   const formattedTree = diffTree
     .map((node) => {
-      if (node.length === 0) {
-        return [''];
-      }
       const {
         state, key, newValue, oldValue, children,
       } = node;
 
       switch (state) {
         case TYPES.NESTED: {
-          return `${indent}${whiteSpace}${key}: ${formatDiffTreeStylish(children, level + 1)}`;
+          return `${indent}${whiteSpace}${key}: ${format(children, level + 1)}`;
         }
         case TYPES.REMOVED: {
-          return `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`;
+          return `${indent}  - ${key}: ${formatValue(oldValue, level)}`;
         }
         case TYPES.ADDED: {
-          return `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`;
+          return `${indent}  + ${key}: ${formatValue(newValue, level)}`;
         }
         case TYPES.UPDATED: {
           return [
-            `${indent}  - ${key}: ${formatValueStylish(oldValue, level)}`,
-            `${indent}  + ${key}: ${formatValueStylish(newValue, level)}`,
+            `${indent}  - ${key}: ${formatValue(oldValue, level)}`,
+            `${indent}  + ${key}: ${formatValue(newValue, level)}`,
           ].join('\n');
         }
         default: {
-          return `${indent}${whiteSpace}${key}: ${formatValueStylish(oldValue, level)}`;
+          return `${indent}${whiteSpace}${key}: ${formatValue(oldValue, level)}`;
         }
       }
     })
@@ -63,4 +60,4 @@ const formatDiffTreeStylish = (diffTree, level = 0) => {
   return `{\n${formattedTree}\n${indent}}`;
 };
 
-export default formatDiffTreeStylish;
+export default format;

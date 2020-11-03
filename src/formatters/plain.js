@@ -1,14 +1,14 @@
 import _ from 'lodash';
 import { TYPES } from '../treebuilder.js';
 
-const formatValue = (valueToFormat) => {
-  if (valueToFormat === null) return 'null';
-  if (_.isObject(valueToFormat)) return '[complex value]';
-  if (_.isString(valueToFormat)) return `'${valueToFormat}'`;
-  return valueToFormat;
+const formatValue = (value) => {
+  if (value === null) return 'null';
+  if (_.isObject(value)) return '[complex value]';
+  if (_.isString(value)) return `'${value}'`;
+  return value;
 };
 
-const formatDiffTreePlain = (diffTree, path = '') => diffTree
+const format = (diffTree, path = '') => diffTree
   .reduce((acc, node) => {
     const {
       state, key, oldValue, newValue, children,
@@ -33,7 +33,7 @@ const formatDiffTreePlain = (diffTree, path = '') => diffTree
         ];
       }
       case TYPES.NESTED: {
-        return [...acc, formatDiffTreePlain(children, `${path}${key}.`)];
+        return [...acc, format(children, `${path}${key}.`)];
       }
 
       default:
@@ -42,4 +42,4 @@ const formatDiffTreePlain = (diffTree, path = '') => diffTree
   }, [])
   .join('\n');
 
-export default formatDiffTreePlain;
+export default format;
