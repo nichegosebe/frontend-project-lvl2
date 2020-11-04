@@ -18,19 +18,22 @@ Can be used as a library or as CLI util.
 
 ## Installation
 
-npm install
+`npm install`
 
 ## Usage as cli utilite
 
-Usage: gendiff [options] <filepath1> <filepath2>
+Usage: 
 
-Options: -V, --version output the version number -f, --format <formatter> output
-format (default: "stylish") -h, --help display help for command
+`gendiff [options] <filepath1> <filepath2>`
+
+Options:
+ - -V, --version output the version number  
+ - -f, --format <formatter> output format (default: "stylish") 
+ - -h, --help display help for command
 
 [![asciicast](https://asciinema.org/a/sZJHv6byIOBCHVLvIntx2oE2h.svg)](https://asciinema.org/a/sZJHv6byIOBCHVLvIntx2oE2h)
 
 ## Usage as a library
 
-import genDiff from 'gendiff';
-
-genDiff(filePath1, filePath2, format);
+`import genDiff from 'gendiff';`
+`genDiff(filePath1, filePath2, format);`
