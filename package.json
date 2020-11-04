@@ -6,7 +6,7 @@
   "type": "module",
   "private": "true",
   "bin": {
-    "gendiff": "./bin/gendiff.js"
+    "gendiff": "./bin/index.js"
   },
   "engines": {
     "node": ">=14"
