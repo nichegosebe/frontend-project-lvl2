@@ -11,10 +11,10 @@ const formatValue = (value) => {
 const format = (diffTree, path = '') => diffTree
   .reduce((acc, node) => {
     const {
-      state, key, oldValue, newValue, children,
+      type, key, oldValue, newValue, children,
     } = node;
 
-    switch (state) {
+    switch (type) {
       case TYPES.REMOVED: {
         return [...acc, `Property '${path}${key}' was removed`];
       }
@@ -42,4 +42,4 @@ const format = (diffTree, path = '') => diffTree
   }, [])
   .join('\n');
 
-export default format;
+export default (data) => `${format(data)}\n`;

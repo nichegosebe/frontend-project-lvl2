@@ -15,27 +15,27 @@ const buildTree = (object1, object2) => _.sortBy(_.union(Object.keys(object1),
     const newValue = object2[key];
 
     if (_.isPlainObject(oldValue) && _.isPlainObject(newValue)) {
-      return { state: TYPES.NESTED, key, children: buildTree(oldValue, newValue) };
+      return { type: TYPES.NESTED, key, children: buildTree(oldValue, newValue) };
     }
 
     if (!_.has(object2, key)) {
-      return { state: TYPES.REMOVED, key, oldValue };
+      return { type: TYPES.REMOVED, key, oldValue };
     }
 
     if (!_.has(object1, key)) {
-      return { state: TYPES.ADDED, key, newValue };
+      return { type: TYPES.ADDED, key, newValue };
     }
 
     if (!_.isEqual(oldValue, newValue)) {
       return {
-        state: TYPES.UPDATED,
+        type: TYPES.UPDATED,
         key,
         oldValue,
         newValue,
       };
     }
 
-    return { state: TYPES.UNCHANGED, key, oldValue };
+    return { type: TYPES.UNCHANGED, key, oldValue };
   });
 
 export default buildTree;

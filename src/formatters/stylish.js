@@ -31,10 +31,10 @@ const format = (diffTree, level = 0) => {
   const formattedTree = diffTree
     .map((node) => {
       const {
-        state, key, newValue, oldValue, children,
+        type, key, newValue, oldValue, children,
       } = node;
 
-      switch (state) {
+      switch (type) {
         case TYPES.NESTED: {
           return `${indent}${whiteSpace}${key}: ${format(children, level + 1)}`;
         }
@@ -60,4 +60,4 @@ const format = (diffTree, level = 0) => {
   return `{\n${formattedTree}\n${indent}}`;
 };
 
-export default format;
+export default (data) => `${format(data)}\n`;
