@@ -9,9 +9,6 @@ const fixtureSets = [
   ['file1.json', 'file2.json'],
   ['file1.yaml', 'file2.yaml'],
   ['file1.ini', 'file2.ini'],
-  ['file1.ini', 'file2.json'],
-  ['file1.yaml', 'file2.json'],
-  ['file1.yaml', 'file2.ini'],
 ];
 
 const stylishDiffString = readFileSync(getFixturePath('stylish.txt'), 'UTF-8');
