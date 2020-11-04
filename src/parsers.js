@@ -3,7 +3,7 @@ import ini from 'ini';
 import _ from 'lodash';
 
 const numberify = (data) => Object.entries(data).reduce((acc, [key, value]) => {
-  if (_.isObject(value) && !_.isArray(value)) return { ...acc, [key]: numberify(value) };
+  if (_.isPlainObject(value)) return { ...acc, [key]: numberify(value) };
   const parsedValue = parseInt(value, 10);
   if (!Number.isNaN(parsedValue)) {
     return { ...acc, [key]: parsedValue };
@@ -18,7 +18,6 @@ const parsers = {
   yaml: yaml.safeLoad,
   yml: yaml.safeLoad,
   ini: parseIni,
-  default: false,
 };
 
 export default (data, dataType) => {

@@ -5,7 +5,6 @@ const formats = {
   plain: formatPlain,
   stylish: formatStylish,
   json: JSON.stringify,
-  default: false,
 };
 
 export default (data, formatName) => {
