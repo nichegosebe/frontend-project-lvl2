@@ -57,7 +57,9 @@ const format = (diffTree, level = 0) => {
     })
     .join('\n');
 
-  return `{\n${formattedTree}\n${indent}}`;
+  return level
+    ? `{\n${formattedTree}\n${indent}}`
+    : `{\n${formattedTree}\n${indent}}\n`;
 };
 
-export default (data) => `${format(data)}\n`;
+export default format;

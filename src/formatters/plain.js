@@ -15,30 +15,27 @@ const format = (diffTree, path = '') => diffTree
 
     switch (type) {
       case TYPES.REMOVED: {
-        return [...acc, `Property '${path}${key}' was removed`];
+        return [...acc, `Property '${path}${key}' was removed\n`];
       }
       case TYPES.UPDATED: {
         return [
           ...acc,
-          `Property '${path}${key}' was updated. From ${formatValue(oldValue)} to ${formatValue(
-            newValue,
-          )}`,
+          `Property '${path}${key}' was updated. From ${formatValue(oldValue)} to ${formatValue(newValue)}\n`,
         ];
       }
       case TYPES.ADDED: {
         return [
           ...acc,
-          `Property '${path}${key}' was added with value: ${formatValue(newValue)}`,
+          `Property '${path}${key}' was added with value: ${formatValue(newValue)}\n`,
         ];
       }
       case TYPES.NESTED: {
         return [...acc, format(children, `${path}${key}.`)];
       }
 
-      default:
-        return acc;
+      default: return acc;
     }
   }, [])
-  .join('\n');
+  .join('');
 
-export default (data) => `${format(data)}\n`;
+export default format;
