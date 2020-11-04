@@ -2,7 +2,6 @@ import _ from 'lodash';
 import { TYPES } from '../treebuilder.js';
 
 const formatValue = (value) => {
-  if (value === null) return 'null';
   if (_.isObject(value)) return '[complex value]';
   if (_.isString(value)) return `'${value}'`;
   return value;
